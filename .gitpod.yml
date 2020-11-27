@@ -15,3 +15,8 @@ tasks:
     command: >
         apachectl start;
         multitail /var/log/apache2/error.log -I /var/log/apache2/access.log
+
+vscode:
+  extensions:
+    - felixfbecker.php-intellisense@2.3.14:FMIUPy0FlHl+kH1Df7LR2A==
+    - aurorabiz.blade-ui-kit@1.2.4:239zwHDdZsSltwXSiSGMow==
