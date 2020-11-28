@@ -1,18 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import 'bootstrap/scss/bootstrap.scss';
+import ReactDOM from 'react-dom'; 
+import './index.scss';
 
 import 'jquery';
 import 'popper.js';
 
 import 'bootstrap/js/src/index';
 
+import { FormLogin } from './forms/login.form';
+
 var reactComponents = [
-    {component: () => <div>hola</div>, tag: '#app'}
+    {component: FormLogin, tag: '[form="login"]'}
 ];
 
 
-window.onload = () => {
+// window.onload = () => {
     reactComponents.forEach(x => {
         if (document.querySelector(x.tag)) {
             if (document.querySelectorAll(x.tag).length == 1) {
@@ -22,4 +24,4 @@ window.onload = () => {
             }            
         }
     });
-}
+//}
