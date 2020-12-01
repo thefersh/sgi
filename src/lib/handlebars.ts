@@ -2,7 +2,11 @@ import { readdirSync } from 'fs';
 import { resolve } from 'path';
 import { handlebars } from 'hbs';
 
-export const hbs = {
+export const hbs: Object = {
+    ifObjectEmpty(data: object, opts: any){
+        return Object.entries(data).length === 0 ? opts.fn(this): opts.inverse(this);
+    },
+    json: (data: string) => JSON.stringify(data),
     staticFilesCss: function () {
         const css = readdirSync(resolve(process.cwd(), 'static')).filter((e) => e.indexOf('css') !== -1);
         let data: string = '';
