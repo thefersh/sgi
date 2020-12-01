@@ -8,7 +8,14 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class DomService {
   getParams!: {[index: string]: any};
   page = {
-    title: 'SGI'
+    title: {
+      text: 'SGI',
+      redirect: '/'
+    },
+    menu: {
+      add: true,
+      profile: true
+    }
   };
   constructor(
     private aRouter: ActivatedRoute,

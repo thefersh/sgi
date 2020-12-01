@@ -8,6 +8,7 @@ import { DefaultLayoutComponent } from './layout/default-layout/default-layout.c
 import { ViewProductComponent } from './page/product/view/view.component';
 import { SetProductPageComponent } from './page/product/set-product-page/set-product-page.component';
 import { DeleteProductPageComponent } from './page/product/delete-product-page/delete-product-page.component';
+import { ProductAddPageComponent } from './page/add/product-add-page/product-add-page.component';
 
 const routes: Routes = [
   {path: '', component: DefaultLayoutComponent, canActivate: [AuthGuard], children: [
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path: 'product/:id', component: ViewProductComponent},
     {path: 'product/:id/set', component: SetProductPageComponent},
     {path: 'product/:id/delete', component: DeleteProductPageComponent},
+    {path: 'add/product', component: ProductAddPageComponent}
   ]},
   {path: 'login', component: LoginComponent},
   {path: '**', component: NotFoundComponent}
