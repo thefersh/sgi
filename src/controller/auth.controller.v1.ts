@@ -6,15 +6,15 @@ import { sign } from 'jsonwebtoken';
 const auth = Router();
 
 auth.post('/login', (req, res)=> {
-    if (req.body.flogine && req.body.floginp){
+    if (req.body.e && req.body.p){
         UserEntity.find({
             select: ['uid', 'password'],
             where: {
-                email: req.body.flogine
+                email: req.body.e
             },
             take: 1
         }).then(r => {
-            if (compareSync(req.body.floginp, r[0].password)) {
+            if (compareSync(req.body.p, r[0].password)) {
                 res.json({
                     data: sign({
                         id: r[0].uid
