@@ -14,6 +14,7 @@ import { AssetsEntity } from './entity/data/assets.entity';
 import { ProductsEntity } from './entity/data/product.entity';
 import { CategoryEntity } from './entity/data/category.entity';
 import { FeacturesEntity } from './entity/data/feactures.entity';
+import { ItemEntity } from './entity/data/item.entity';
 
 dotenv.config();
 
@@ -34,7 +35,8 @@ dotenv.config();
             AssetsEntity,
             ProductsEntity,
             CategoryEntity,
-            FeacturesEntity
+            FeacturesEntity,
+            ItemEntity
         ]
     }, {
         name: 'logs',

@@ -10,9 +10,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   exports: [
+    MatSelectModule,
     MatProgressSpinnerModule,
     MatDividerModule,
     MatMenuModule,

@@ -6,17 +6,7 @@ ports:
   - port: 3306
     onOpen: ignore
 tasks:
-  - init: composer install
-    command: echo "Hallo"
-  - name: MySQL
+  - init: npm i 
+  - name: Developer Env
     command: >
-        mysqld
-  - name: Apache
-    command: >
-        apachectl start;
-        multitail /var/log/apache2/error.log -I /var/log/apache2/access.log
-
-vscode:
-  extensions:
-    - felixfbecker.php-intellisense@2.3.14:FMIUPy0FlHl+kH1Df7LR2A==
-    - aurorabiz.blade-ui-kit@1.2.4:239zwHDdZsSltwXSiSGMow==
+        npm run dev

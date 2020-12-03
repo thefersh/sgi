@@ -1,1 +1,47 @@
-<p>set-product-page works!</p>
+<div class="container" *ngIf="this.type === 'category'">
+  <div class="row my-3">
+    <div class="col-12">
+      <h2>{{ this.data.title }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p class="text-muted">{{ this.data.description }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <form class="col-12 col-md-8" *ngIf="this.categorys.length !== 0" [formGroup]="this.selectForm">
+      <mat-card>
+        <mat-card-title>Selecciona una Categoria</mat-card-title>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Seleccione una Opcion</mat-label>
+          <mat-select formControlName="asign">
+            <mat-option [value]="i.value" *ngFor="let i of this.categorys">{{ i.name }}</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>category</mat-icon>
+        </mat-form-field>
+        <div>
+            <button mat-flat-button (click)="this.submitSelectCategory('select')" color="primary" [disabled]="this.isSubmit.select"><span class="d-inline-block">Asignar</span><mat-spinner class="d-inline-block ml-2" diameter="16" mode="indeterminate" *ngIf="this.isSubmit.select"></mat-spinner> </button>
+            <button mat-flat-button (click)="this.submitSelectCategory('selectContinue')" *ngIf="this.complete" [disabled]="this.isSubmit.selectContinue" class="ml-2"><span class="d-inline-block">Asignar y Continuar</span><mat-spinner class="d-inline-block ml-2" diameter="16" mode="indeterminate" *ngIf="this.isSubmit.selectContinue"></mat-spinner> </button>
+        </div>
+      </mat-card>
+    </form>
+    <div class="col-12" [class.col-md-4]="this.categorys.length !== 0" [formGroup]="this.createForm">
+      <mat-card>
+        <mat-card-title>Crear una Categoria</mat-card-title>
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nombre de la Categoria</mat-label>
+            <input matInput placeholder="Mi Categoria Nueva" type="text" formControlName="name">
+            <mat-icon matSuffix>category</mat-icon>
+            <mat-hint>Al crear una categoria se asignara automaticamente a <b>{{ this.data.title }}</b>.</mat-hint>
+          </mat-form-field>
+          <div class="mt-3">
+            <button mat-flat-button type="button" (click)="this.submitCreateCategory('create')" color="primary" [disabled]="this.isSubmit.create"><span class="d-inline-block">Crear</span><mat-spinner class="d-inline-block ml-2" diameter="16" mode="indeterminate" *ngIf="this.isSubmit.create"></mat-spinner> </button>
+            <button mat-flat-button type="button" (click)="this.submitCreateCategory('createContinue')" *ngIf="this.complete" [disabled]="this.isSubmit.createContinue" class="ml-2"><span class="d-inline-block">Crear y Continuar</span><mat-spinner class="d-inline-block ml-2" diameter="16" mode="indeterminate" *ngIf="this.isSubmit.createContinue"></mat-spinner> </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

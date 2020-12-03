@@ -8,8 +8,8 @@ export class CategoryEntity extends BaseEntity {
     @Column()
     name!: string;
 
-    @Column()
-    description!: string;
+    @Column({default: ''})
+    description?: string;
 
     @CreateDateColumn()
     createAt?: string;

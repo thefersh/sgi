@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DomService } from './dom.service';
 
@@ -13,6 +13,12 @@ export class AuthService {
     private router: Router,
     private dom: DomService
   ) { }
+
+  getHeaders(): HttpHeaders {
+    return new HttpHeaders({...(localStorage.getItem('authorization') ? {
+      authorization: localStorage.getItem('authorization') as string
+    } : {})});
+  }
 
   login(data: any): Promise<string>{
     return new Promise(res => {
