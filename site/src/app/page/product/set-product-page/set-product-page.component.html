@@ -45,3 +45,80 @@
     </div>
   </div>
 </div>
+
+
+<div class="container" *ngIf="this.type === 'feactures'">
+  <div class="row my-3">
+    <div class="col-12">
+      <h2>{{ this.data.title }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p class="text-muted">{{ this.data.description }}</p>
+    </div>
+  </div>
+
+  <div class="row my-3" *ngFor="let o of this.feacturesExistItem; let i = index">
+    <div class="col-12 col-md-5 mb-3 align-items-center d-flex">
+      <p *ngIf="o.isEdit" class="w-100">
+        <mat-form-field style="margin-bottom: -1.25em" appearance="outline" class="w-100">
+        <mat-label>Nombre:</mat-label>
+          <input matInput [placeholder]="o.name" [value]="o.name" type="text" required [id]="'reactName' + i">
+        </mat-form-field>
+      </p>
+      <p *ngIf="!o.isEdit"><b>{{ o.name }}</b></p>
+    </div>
+    <div class="col-12 col-md-5 mb-3 align-items-center d-flex">
+      <p *ngIf="o.isEdit" class="w-100">
+        <mat-form-field style="margin-bottom: -1.25em" appearance="outline" class="w-100">
+        <mat-label>Valor:</mat-label>
+          <input matInput [placeholder]="o.value" [value]="o.value" type="text" required [id]="'reactValue' + i">
+        </mat-form-field>
+      </p>
+      <p *ngIf="!o.isEdit">{{ o.value }}</p>
+    </div>
+    <div class="col-12 col-md-2 mb-3 align-items-center d-flex">
+      <button mat-stroked-button class="d-block w-100" style="color: var(--green); border-color: var(--green);" *ngIf="!o.isEdit" (click)="o.isEdit = true;"><mat-icon>edit</mat-icon></button>
+      <button mat-flat-button class="d-block w-100" color="warn" *ngIf="o.isEdit" (click)="o.isEdit = false;"><mat-icon>close</mat-icon></button>
+      <button mat-flat-button class="d-block w-100 ml-1" (click)="this.submitEditFeacture(o.id, i)" style="color: #fff;background: var(--green);" *ngIf="o.isEdit"><mat-icon>check</mat-icon></button>
+      <button mat-flat-button class="d-block w-100 ml-1" (click)="this.submitDeleteFeacture(i)" *ngIf="o.isEdit"><mat-icon>delete</mat-icon></button>
+    </div>
+  </div>
+
+  <form class="container-fluid" [formGroup]="this.fForm">
+    <div formArrayName="f">
+      <div class="row" *ngFor="let a of this.fFormF.controls; let i = index" [formGroupName]="i">
+        <div class="col-12 mb-3 col-md-5 d-flex align-items-center">
+          <mat-form-field style="margin-bottom: -1.25em" appearance="outline" class="w-100">
+            <mat-label>Nombre:</mat-label>
+            <input matInput placeholder="Mi caracteristica Nueva" type="text" formControlName="name">
+            <mat-error *ngIf="this.fFormF.controls[i].get('name')?.hasError('required')">Este campo es Requerido</mat-error>
+            <mat-error *ngIf="this.fFormF.controls[i].get('name')?.hasError('minLength')">Minimo 3 Caracteres</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 mb-3 col-md-5 d-flex align-items-center">
+          <mat-form-field style="margin-bottom: -1.25em" appearance="outline" class="w-100">
+            <mat-label>Valor:</mat-label>
+            <input matInput placeholder="valor" type="text" formControlName="value">
+            <mat-error *ngIf="this.fFormF.controls[i].get('value')?.hasError('required')">Este campo es Requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 mb-3 col-md-2 d-flex align-items-center">
+          <button mat-flat-button color="warn" (click)="this.fFormRemove(i)"><mat-icon>delete</mat-icon></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row pb-3 mt-2">
+      <div class="col-12">
+        <button mat-stroked-button style="color: var(--green);" (click)="this.fFormAdd()">Agregar Caracteristica</button>
+        <div class="float-right" *ngIf="this.fFormF.length !== 0">
+          <button mat-flat-button color="primary"  type="button" (click)="this.submitFeacturesNew('feacturesNew')">Guardar</button>
+          <button mat-stroked-button type="button" (click)="this.submitFeacturesNew('feacturesNewContinue')" class="ml-2" *ngIf="this.complete">Guardar y Continuar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</div>

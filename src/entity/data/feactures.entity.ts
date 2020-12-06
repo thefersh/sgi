@@ -3,8 +3,11 @@ import { BaseEntity, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDat
 @Entity({name: 'feactures'})
 export class FeacturesEntity extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
-    uidCategory?: string;
+    uidFeactures?: string;
 
+    @Column()
+    uidProduct!: string;
+    
     @Column()
     name!: string;
 

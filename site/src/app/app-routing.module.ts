@@ -13,9 +13,14 @@ import { ProductAddPageComponent } from './page/add/product-add-page/product-add
 const routes: Routes = [
   {path: '', component: DefaultLayoutComponent, canActivate: [AuthGuard], children: [
     {path: '', component: IndexComponent},
-    {path: 'product/:id', component: ViewProductComponent},
-    {path: 'product/:id/set', component: SetProductPageComponent},
-    {path: 'product/:id/delete', component: DeleteProductPageComponent},
+    {path: 'product', children: [
+      {path: '', pathMatch: 'full', redirectTo: '/'},
+      {path: ':id', children: [
+        {path: '', component: ViewProductComponent},
+        {path: 'set', component: SetProductPageComponent},
+        {path: 'delete', component: DeleteProductPageComponent}
+      ]}
+    ]},
     {path: 'add/product', component: ProductAddPageComponent}
   ]},
   {path: 'login', component: LoginComponent},

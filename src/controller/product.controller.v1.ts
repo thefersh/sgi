@@ -2,9 +2,61 @@ import { Router } from 'express';
 import { ProductsEntity } from '../entity/data/product.entity';
 import { ProductService } from '../services/product.service';
 import { ItemEntity } from '../entity/data/item.entity';
+import { FeacturesEntity } from '../entity/data/feactures.entity';
 
 const productApi = Router();
 const p = new ProductService;
+
+productApi.delete('/feactures', (req, res) => {
+    if(req.query.id) {
+        FeacturesEntity.createQueryBuilder()
+            .delete()
+            .where('uidFeactures = :id', {id: req.query.id})
+            .execute().then(r => res.json({data: true})).catch(e => res.json({err: 'No se pudo Eliminar'}));
+    } else {
+        res.json({err: 'No se pudo eliminar'});
+    }
+});
+
+productApi.patch('/feactures', (req, res) => {
+    if(req.body.id){
+        FeacturesEntity.createQueryBuilder()
+            .update()
+            .set({
+                ...(req.body.name ? {name: req.body.name} : {}),
+                ...(req.body.value ? {value: req.body.value} : {})
+            })
+            .where('uidFeactures = :id', {id: req.body.id})
+            .execute().then(r => res.json({data: true})).catch(e => res.json({err: 'No se Pudo realizar Cambios'}));
+    } else {
+        res.json({err: 'No se pudo realizar cambios'});
+    }
+});
+
+productApi.get('/feactures', (req, res) => {
+    if(req.query.id){
+        FeacturesEntity.find({
+            select: ['uidFeactures', 'name', 'value'],
+            where: {
+                uidProduct: req.query.id
+            }
+        }).then(r => res.json({data: r})).catch(e => res.json({err: 'Hubo un error al encontrar las caracteristicas'}))
+    }else {
+        res.json({err: 'No se encuentra'});
+    }
+});
+
+productApi.post('/feactures', (req, res)=> {
+    if (req.body.feactures) {
+        FeacturesEntity
+            .createQueryBuilder()
+            .insert()
+            .values(req.body.feactures)
+            .execute().then(r => res.json({data: true})).catch(e => res.json({err: 'Hubo un problema al incertar las Caracteristicas'}));
+    }else {
+        res.json({err: 'Rellene los datos correctamente'});
+    }
+});
 
 productApi.post('/add/base', (req, res) => {
     if(req.body.name && req.body.price && req.body.description && req.body.cantidad){
