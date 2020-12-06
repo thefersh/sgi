@@ -17,6 +17,7 @@ import { DeleteProductPageComponent } from './page/product/delete-product-page/d
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductAddPageComponent } from './page/add/product-add-page/product-add-page.component';
+import { SearchPageComponent } from './page/search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProductAddPageComponent } from './page/add/product-add-page/product-add
     ViewProductComponent,
     SetProductPageComponent,
     DeleteProductPageComponent,
-    ProductAddPageComponent
+    ProductAddPageComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
