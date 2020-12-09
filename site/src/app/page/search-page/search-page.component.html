@@ -1,1 +1,56 @@
-<p>search-page works!</p>
+<div class="container my-3">
+  <div class="row">
+    <div class="col-12">
+      <p>Filtros de Busqueda (0)</p>
+    </div>
+    <div class="col-12">
+      <div class="d-flex align-items-center">
+        <mat-form-field appearance="outline" class="w-100" style="margin-bottom: -1.34375em;">
+          <mat-label>Tipo:</mat-label>
+          <mat-select [formControl]="this.formFilterSelectType">
+            <mat-option *ngFor="let f of filterSelect" [value]="f.value">
+              {{f.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-icon-button *ngIf="this.formFilterSelectType.value !== null" (click)="this.formFilterSelectType.reset()"><mat-icon>close</mat-icon></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div *ngFor="let o of this.results">
+    <div class="row my-2 py-3" style="border-bottom: 1px solid rgba(0,0,0,.12)!important;" *ngIf="o.type === 'users'">
+      <div class="col-4 col-md-3 col-lg-2">
+        <img [src]="o.img" class="rounded-circle">
+      </div>
+      <div class="col-8 col-md-9 col-lg-10">
+        <a [routerLink]="'/user/'+o.id">
+          <h2>{{ o.name }}</h2>
+        </a>
+        <a mat-stroked-button *ngIf="o.role === 'admin'" routerLink="/role/{{ o.role }}"><mat-icon>admin_panel_settings</mat-icon> Administrador</a>
+        <a mat-stroked-button *ngIf="o.role === 'developer'" routerLink="/role/{{ o.role }}"><mat-icon>developer_mode</mat-icon> Desarrolador</a>
+        <a mat-stroked-button *ngIf="o.role === 'seller'" routerLink="/role/{{ o.role }}"><mat-icon>storefront</mat-icon> Vendedor</a>
+      </div>
+    </div>
+    <div class="row my-2 py-3" style="border-bottom: 1px solid rgba(0,0,0,.12)!important;" *ngIf="o.type === 'product'">
+      <div class="col-4 col-md-3 col-lg-2">
+        <img src="{{ o.img }}" class="img-thumbnail">
+      </div>
+      <div class="col-8 col-md-9 col-lg-10">
+        <a [routerLink]="'/product/'+o.id">
+          <h2 class="mb-3">{{ o.name }}</h2>
+        </a>
+        <p class="view-price">
+          <span>BOB</span>
+          <span>{{ o.priceComplete }}</span>
+          <span>{{ o.priceFlat }}</span>
+        </p>
+        <p *ngIf="o.stock">Disponible</p>
+        <p *ngIf="!o.stock" class="text-danger font-weight-bold">No Disponible</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,9 @@ export class ProductsEntity extends BaseEntity {
 
     @Column()
     price!: string;
+    
+    @Column({ default: '' })
+    img?: string;
 
     @CreateDateColumn()
     createAt?: string;
