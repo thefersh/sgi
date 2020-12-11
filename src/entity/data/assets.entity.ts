@@ -3,10 +3,13 @@ import { BaseEntity, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDat
 @Entity({name: 'assets'})
 export class AssetsEntity extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
-    uidAsset?: string
+    uidAsset?: string;
 
     @Column()
-    service!: 'gStorage';
+    uidProduct?: string;
+
+    @Column()
+    service!: 'local';
 
     @Column({default: 'desconocido'})
     name?: string;
@@ -16,6 +19,9 @@ export class AssetsEntity extends BaseEntity {
 
     @Column()
     route!: string;
+
+    @Column()
+    type!: string;
 
     @CreateDateColumn()
     createAt?: string;

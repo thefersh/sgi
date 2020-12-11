@@ -1,0 +1,21 @@
+
+.box{
+  width: 200px;
+  height: auto;
+  display: inline-block;
+}
+
+.w{
+  width: calc(100% / 3);
+}
+.galery{
+  img, div{
+    width: calc(50% - 16px);
+    margin: 4px
+  }
+}
+
+.input-file{
+      font-size: 1.5rem;
+          height: 200px;
+}

@@ -140,7 +140,6 @@ export class SetProductPageComponent implements OnInit {
           ...this.fFormF.value[x]
         });
       }
-      console.log(isSubmit);
       this.product.submitFeacturesNew(
         data,
         this.aRouter.snapshot.params.id,

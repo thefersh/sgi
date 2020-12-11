@@ -90,7 +90,7 @@ export class ProductService {
                     id: s?.uidProduct,
                     title: s?.name,
                     description: s?.description,
-                    price: s?.price as (number | undefined),
+                    price: s?.price as (number | undefined)
                 });
             }).catch(e => err(e));
         });

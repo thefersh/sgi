@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import { existsSync } from 'fs';
 
 import routerApiV1 from './router';
 import { createConnections } from 'typeorm';
@@ -53,7 +54,18 @@ dotenv.config();
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: false}));
         app.use(Express.static(resolve(process.cwd(), 'static')));
+        app.get('/media/:name', (req, res) => {
+            if (existsSync(resolve(process.cwd(), 'uploads/media',req.params.name))) {
+                res.sendFile(resolve(process.cwd(), 'uploads/media',req.params.name));
+            }else {
+                res.json({
+                    err: 'El Archivo no existe'
+                })
+            }
+        })
         app.use('/api/v1', routerApiV1);
+        app.get('**', (req, res) => res.sendFile(resolve(process.cwd(), 'static/index.html')));
+        app.get('/', (req, res) => res.sendFile(resolve(process.cwd(), 'static/index.html')));
         
         app.listen(process.env.PORT || 3000 , () => console.log('server Start on port 3000'));
     }).catch(e => {

@@ -21,11 +21,11 @@ auth.post('/login', (req, res)=> {
                     }, process.env.JSON_KEY as string, { expiresIn: process.env.JSON_EXPIRE})
                 });
             }else {
-                res.status(403).json({err: 'Los datos no son Validos'});
+                res.json({err: 'Los datos no son Validos'});
             }
-        }).catch(e => res.status(403).json({err: 'Los datos no son validos'}));
+        }).catch(e => res.json({err: 'Los datos no son validos'}));
     }else {
-        res.status(403).json({err: 'Datos Incompletos'});
+        res.json({err: 'Datos Incompletos'});
     }
 });
 
@@ -36,7 +36,7 @@ auth.get('/user', (req, res) => {
     user.lastName = 'ticona';
     user.email = 'thefersh24@gmail.com',
     user.password = hashSync('test', genSaltSync(12));
-    user.save().then(res.json);
+    user.save().then(res.json).catch(res.json);
 })
 */
 

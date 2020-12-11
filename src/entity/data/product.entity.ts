@@ -11,14 +11,14 @@ export class ProductsEntity extends BaseEntity {
     @Column()
     name!: string;
     
-    @Column()
+    @Column({length: 300})
     description!: string;
 
     @Column()
     price!: string;
     
     @Column({ default: '' })
-    img?: string;
+    img?: string; 
 
     @CreateDateColumn()
     createAt?: string;

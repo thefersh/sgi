@@ -3,6 +3,7 @@ import { DomService } from 'src/app/services/dom.service';
 import { SearchService } from 'src/app/services/search.service';
 import { FormControl, FormBuilder } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-search-page',
@@ -24,7 +25,8 @@ export class SearchPageComponent implements OnInit {
     private dom: DomService,
     private search: SearchService,
     private fb: FormBuilder,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private app: AppService,
   ) {
     document.title = `${this.dom.getParams.search_query} - Buscar en Sig`;
 
@@ -49,7 +51,7 @@ export class SearchPageComponent implements OnInit {
       query: this.dom.getParams.search_query,
       filter: JSON.stringify(this.filter)
     }).then(e => {
-      e.forEach(x => {
+      e.forEach((x, i) => {
         this.results.push({
           id: x.id,
           name: x.name,
@@ -58,6 +60,8 @@ export class SearchPageComponent implements OnInit {
           priceFlat: x.priceFlat,
           img: this.sanitizer.bypassSecurityTrustResourceUrl(x.img)
         });
+        this.app.getProductCountStock(x.id).then(r => this.results[i].stock = r !== 0).catch(() => this.results[i].stock = false);
+
       });
       this.results = e;
     });
