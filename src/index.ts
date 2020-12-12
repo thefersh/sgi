@@ -22,14 +22,15 @@ dotenv.config();
 (function serverStart() {
     const mysqlBase: MysqlConnectionOptions = {
         type: 'mysql',
-        host: '127.0.0.1',
-        username: 'root',
-        password: ''
+        host: process.env.DB_HOST || '127.0.0.1',
+        username: process.env.DB_USERNAME || 'root',
+        password: process.env.DB_PASSWORD || '',
+		port: (<number>process.env.DB_PORT) || 3306
     }; 
     createConnections([{
         name: 'default',
         ...mysqlBase,
-        database: 'data',
+        database: process.env.DB_DATABASE_DATA || 'data',
         synchronize: true,
         entities: [
             UserEntity,
@@ -42,7 +43,7 @@ dotenv.config();
     }, {
         name: 'logs',
         ...mysqlBase,
-        database: 'logs',
+        database: process.env.DB_DATABASE_LOG || 'logs',
         synchronize: true,
         entities: []
     }]).then( c => {
@@ -70,6 +71,7 @@ dotenv.config();
         app.listen(process.env.PORT || 3000 , () => console.log('server Start on port 3000'));
     }).catch(e => {
         const app = Express();
+		console.log(e);
         app.get('/', (req, res)=> res.json({err: 'base de datos', detall: e}));
         app.listen(process.env.PORT || 3000 , () => console.log('server Start on port 3000 {DATABASE}'));
     })

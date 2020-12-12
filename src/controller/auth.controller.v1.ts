@@ -29,7 +29,7 @@ auth.post('/login', (req, res)=> {
     }
 });
 
-/*
+
 auth.get('/user', (req, res) => {
     const user = new UserEntity();
     user.name = 'fernando';
@@ -38,6 +38,6 @@ auth.get('/user', (req, res) => {
     user.password = hashSync('test', genSaltSync(12));
     user.save().then(res.json).catch(res.json);
 })
-*/
+
 
 export default auth; 
