@@ -1,1 +1,78 @@
-<p>index works!</p>
+<div class="container-fluid mt-3 pb-3">
+  <div class="row mb-3">
+    <div class="col-4">
+      <mat-card class="d-flex justify-content-between">
+        <div>
+          <div class="h2">{{ this.cardClient }}</div>
+          <div>Clientes Nuevos</div>
+        </div>
+        <div>
+          <mat-icon class="icon-card">group_add</mat-icon>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card class="d-flex justify-content-between">
+        <div>
+          <div class="h2">{{ this.cardSallerMonth }}</div>
+          <div>Ventas/Mes</div>
+        </div>
+        <div>
+          <mat-icon class="icon-card">store</mat-icon>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card class="d-flex justify-content-between">
+        <div>
+          <div class="h2">{{ this.cardSallerToday }}</div>
+          <div>Ventas/Hoy</div>
+        </div>
+        <div>
+          <mat-icon class="icon-card">shopping_bag</mat-icon>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-9">
+      <mat-card class="h-100">
+        <mat-card-subtitle>Ventas realizadas en la semana 45 <a routerLink="/">(12/12/2020 - 12/13/2020)</a></mat-card-subtitle>
+        <mat-card-content>chart (ventas relizadas, visualizaciones, ventas realizadas en el anterior periodo)/semana</mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-3">
+      <mat-card>
+        <mat-card-subtitle>Tendencia</mat-card-subtitle>
+        <mat-card-content>
+          <mat-nav-list mat-card-image>
+            <mat-list-item *ngFor="let t of this.trends;let i = index"><a matLine [routerLink]="'/product/' + t.id">{{ i+1 }}.- {{ t.name }}</a><p>{{ t.seller }}</p></mat-list-item>
+          </mat-nav-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <mat-card class="h-100">
+        <mat-card-subtitle>Errores Encontrados</mat-card-subtitle>
+        <mat-card-content>
+          <mat-nav-list mat-card-image>
+            <mat-list-item *ngFor="let e of this.errors;let i = index">
+              <a matLine *ngIf="e.type === 'stock'" (click)="this.errorSolveTypeStock(e.id)">{{ i+1 }}.- {{ e.name }}</a>
+              <mat-icon>launch</mat-icon>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-9">
+      <mat-card class="h-100">
+        <mat-card-subtitle>Usuarios frecuentes (3)</mat-card-subtitle>
+        <mat-card-content>
+          table
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

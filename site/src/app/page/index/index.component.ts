@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomService } from 'src/app/services/dom.service';
+import { GetTrendsInterface, GetErrorInterface } from 'src/app/interface/app.service.interface';
 
 @Component({
   selector: 'app-index',
@@ -7,6 +8,13 @@ import { DomService } from 'src/app/services/dom.service';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
+  cardClient = 123;
+  cardSallerMonth = 123;
+  cardSallerToday = 123;
+
+  trends: GetTrendsInterface[] = [];
+
+  errors: GetErrorInterface[] = [];
 
   constructor(
     private dom: DomService
@@ -19,7 +27,23 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     document.title = ('Sistema de Gestion de Inventario');
+    Array.from(Array(10), (_, i) => i + 1).forEach((x, i) => {
+      this.trends.push({
+        id: 'idproduct',
+        name: 'name product',
+        seller: (120 - (10 * i))
+      });
+    });
 
+    this.errors = [
+      {id: 'idproduct', name: 'name product', type: 'stock'},
+      {id: 'idproduct', name: 'name product', type: 'stock'},
+      {id: 'idproduct', name: 'name product', type: 'stock'},
+    ];
+  }
+
+  errorSolveTypeStock(id: string): void{
+    console.log('camiar stock ' + id);
   }
 
 }
