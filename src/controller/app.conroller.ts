@@ -19,6 +19,15 @@ const m = multer({
 
 const app = Router();
 
+/** Product: Retorna las tendencias */
+app.get('/trends', (req, res) => {
+    ProductsEntity.createQueryBuilder()
+        .select('uidProduct,name')
+        .limit(10)
+        .orderBy('activity', 'DESC')
+        .execute().then(d => res.json({data: d})).catch(e => res.json({err: 'No se  puede obtener las tendencias'}));
+});
+
 /** Product: Retorna el estado del stock */
 app.get('/p/:id/stock', (req, res)=> {
     ItemEntity.count({uidProduct: req.params.id, isSold: 0}).then(r => res.json({data: r})).catch(e => res.json({err: 'No se pudo Obtener el estado del Stock'}));

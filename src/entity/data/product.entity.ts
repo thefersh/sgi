@@ -20,6 +20,9 @@ export class ProductsEntity extends BaseEntity {
     @Column({ default: '' })
     img?: string; 
 
+    @Column({ default: 0 })
+    activity?: number;
+
     @CreateDateColumn()
     createAt?: string;
 

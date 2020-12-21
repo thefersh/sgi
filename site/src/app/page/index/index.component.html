@@ -35,25 +35,7 @@
     </div>
   </div>
   <div class="row my-3">
-    <div class="col-9">
-      <mat-card class="h-100">
-        <mat-card-subtitle>Ventas realizadas en la semana 45 <a routerLink="/">(12/12/2020 - 12/13/2020)</a></mat-card-subtitle>
-        <mat-card-content>chart (ventas relizadas, visualizaciones, ventas realizadas en el anterior periodo)/semana</mat-card-content>
-      </mat-card>
-    </div>
-    <div class="col-3">
-      <mat-card>
-        <mat-card-subtitle>Tendencia</mat-card-subtitle>
-        <mat-card-content>
-          <mat-nav-list mat-card-image>
-            <mat-list-item *ngFor="let t of this.trends;let i = index"><a matLine [routerLink]="'/product/' + t.id">{{ i+1 }}.- {{ t.name }}</a><p>{{ t.seller }}</p></mat-list-item>
-          </mat-nav-list>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-3">
+    <div class="col-4">
       <mat-card class="h-100">
         <mat-card-subtitle>Errores Encontrados</mat-card-subtitle>
         <mat-card-content>
@@ -63,16 +45,30 @@
               <mat-icon>launch</mat-icon>
             </mat-list-item>
           </mat-nav-list>
+          <div>Proximamente</div>
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-9">
+    <div class="col-4">
       <mat-card class="h-100">
         <mat-card-subtitle>Usuarios frecuentes (3)</mat-card-subtitle>
         <mat-card-content>
-          table
+          <div>Proximamente</div>
         </mat-card-content>
       </mat-card>
     </div>
+    <div class="col-4">
+      <mat-card>
+        <mat-card-subtitle>Tendencia</mat-card-subtitle>
+        <mat-card-content>
+          <mat-nav-list mat-card-image>
+            <mat-list-item *ngFor="let t of this.trends;let i = index"><a matLine [routerLink]="'/product/' + t.uidProduct">{{ i+1 }}.- {{ t.name }}</a></mat-list-item>
+          </mat-nav-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    
   </div>
 </div>

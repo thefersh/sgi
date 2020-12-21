@@ -3,7 +3,7 @@ import { DomService } from './dom.service';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { GetProductinfoInterface, GetProductFeacturesInterface, GetProductGaleryInterface } from '../interface/app.service.interface';
+import { GetProductinfoInterface, GetProductFeacturesInterface, GetProductGaleryInterface, GetTrendsInterface } from '../interface/app.service.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,6 +17,20 @@ export class AppService {
     private http: HttpClient,
     private router: Router
   ) { }
+
+  getTrends(): Promise<GetTrendsInterface[]> {
+    return new Promise((res, err) => {
+      this.http.get<{data: GetTrendsInterface[], err: string}>('/api/v1/app/trends', {headers: this.auth.getHeaders()})
+        .subscribe(s => {
+          if(s.err) {
+            this.dom.notification(s.err);
+            err();
+          }else{
+            res(s.data);
+          }
+        });
+    });
+  }
 
   getProductCountStock(id: string): Promise<number> {
     return new Promise((res, err) => {

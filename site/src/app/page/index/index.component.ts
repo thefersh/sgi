@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DomService } from 'src/app/services/dom.service';
 import { GetTrendsInterface, GetErrorInterface } from 'src/app/interface/app.service.interface';
+import { ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-index',
@@ -17,7 +20,8 @@ export class IndexComponent implements OnInit {
   errors: GetErrorInterface[] = [];
 
   constructor(
-    private dom: DomService
+    private dom: DomService,
+    private app: AppService
   ) {
     this.dom.page.title.text = 'SGI';
     this.dom.page.title.redirect = '/';
@@ -26,20 +30,8 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.app.getTrends().then(d => this.trends = d);
     document.title = ('Sistema de Gestion de Inventario');
-    Array.from(Array(10), (_, i) => i + 1).forEach((x, i) => {
-      this.trends.push({
-        id: 'idproduct',
-        name: 'name product',
-        seller: (120 - (10 * i))
-      });
-    });
-
-    this.errors = [
-      {id: 'idproduct', name: 'name product', type: 'stock'},
-      {id: 'idproduct', name: 'name product', type: 'stock'},
-      {id: 'idproduct', name: 'name product', type: 'stock'},
-    ];
   }
 
   errorSolveTypeStock(id: string): void{

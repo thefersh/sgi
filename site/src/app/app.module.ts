@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductAddPageComponent } from './page/add/product-add-page/product-add-page.component';
 import { SearchPageComponent } from './page/search-page/search-page.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SearchPageComponent } from './page/search-page/search-page.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "node script.js",
-    "epredev": "tsc && cd ./site && npm run build",
+    "predev": "tsc && cd ./site && npm run build",
     "dev": "run-p dev:*",
     "dev:angular": "cd ./site && npm start",
     "dev:typescript": "tsc -w",

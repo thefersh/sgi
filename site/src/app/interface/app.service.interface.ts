@@ -1,15 +1,14 @@
 import { SafeResourceUrl } from '@angular/platform-browser';
 
+export interface GetTrendsInterface{
+  uidProduct: string;
+  name: string;
+}
+
 export interface GetErrorInterface{
   id: string;
   name: string;
   type: 'stock';
-}
-
-export interface GetTrendsInterface{
-  id: string;
-  name: string;
-  seller: number;
 }
 
 export interface GetProductGaleryInterface {

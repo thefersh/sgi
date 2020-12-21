@@ -29,15 +29,15 @@ auth.post('/login', (req, res)=> {
     }
 });
 
-
+/*
 auth.get('/user', (req, res) => {
     const user = new UserEntity();
     user.name = 'fernando';
     user.lastName = 'ticona';
     user.email = 'thefersh24@gmail.com',
     user.password = hashSync('test', genSaltSync(12));
-    user.save().then(res.json).catch(res.json);
+    user.save().then(d => res.json(d)).catch(d => res.json(d));
 })
-
+*/
 
 export default auth; 
