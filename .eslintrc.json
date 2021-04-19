@@ -8,7 +8,8 @@
   "overrides": [
     {
       "files": [
-        "*.ts"
+        "*.ts",
+        "./app/**/*.ts"
       ],
       "extends": [
         "eslint:recommended",
