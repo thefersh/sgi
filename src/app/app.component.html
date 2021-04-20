@@ -1,1 +1,10 @@
+<header class="navbar" *ngIf="isElectron" [style.backgroundColor]="status === 'success' ? '#11a1fd' : status === 'alert' ? '#ff9931': '#FF3131'">
+    <div class="menu"><a routerLink="/">Sgi</a></div>
+    <div class="title">{{ titlePage }}</div>
+    <div class="window-action">
+        <button type="button" (click)="windowAction('minim')" class="text-4xl">-</button>
+        <button type="button" (click)="windowAction('resto')"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm0 14H5V8h14v10z"/></svg></button>
+        <button type="button" (click)="windowAction('close')"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg></button>
+    </div>
+</header>
 <router-outlet></router-outlet>

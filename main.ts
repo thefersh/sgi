@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import { log } from './app/index';
@@ -22,6 +22,7 @@ function createWindow(): BrowserWindow {
     y: 0,
     width: size.width,
     height: size.height,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
@@ -30,7 +31,7 @@ function createWindow(): BrowserWindow {
     },
   });
 
-  if (serve) {
+  if(serve){
 
     win.webContents.openDevTools();
 
@@ -39,7 +40,7 @@ function createWindow(): BrowserWindow {
     });
     win.loadURL('http://localhost:4200');
 
-  } else {
+  }else{
     win.loadURL(url.format({
       pathname: path.join(__dirname, 'dist/index.html'),
       protocol: 'file:',
@@ -52,6 +53,7 @@ function createWindow(): BrowserWindow {
     // Dereference the window object, usually you would store window
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
+    win.destroy();
     win = null;
   });
 
@@ -63,7 +65,10 @@ try {
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   // Added 400 ms to fix the black background issue while using transparent window. More detais at https://github.com/electron/electron/issues/15947
-  app.on('ready', () => setTimeout(createWindow, 400));
+  app.on('ready', () => setTimeout(() => {
+    createWindow();
+    win.setMenu(null);
+  }, 400));
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
@@ -75,10 +80,22 @@ try {
   });
 
   app.on('activate', () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
     if (win === null) {
       createWindow();
+    }
+  });
+
+  ipcMain.on('windowAction', (e, d)=> {
+    if (d === 'close') {
+      win.emit('closed', '');
+    }else if (d === 'minim') {
+      win.minimize();
+    }else {
+      if (win.isMaximized()) {
+        win.restore();
+      }else{
+        win.maximize();
+      }
     }
   });
 

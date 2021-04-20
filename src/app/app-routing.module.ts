@@ -4,17 +4,11 @@ import { PageNotFoundComponent } from './shared/components';
 
 import { HomeRoutingModule } from './home/home-routing.module';
 import { DetailRoutingModule } from './detail/detail-routing.module';
+import { LoginComponent } from './page/login/login.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: '**',
-    component: PageNotFoundComponent
-  }
+  {path: 'login', component: LoginComponent},
+  {path: '**',component: PageNotFoundComponent}
 ];
 
 @NgModule({
