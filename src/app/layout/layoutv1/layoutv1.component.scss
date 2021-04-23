@@ -1,0 +1,17 @@
+.sidebar{
+    flex-basis: 20%;
+    @media (max-width: 767.99px) {
+        flex-basis: 100%;
+        &:not(.show){
+            display: none!important;
+        }
+    } 
+}
+.main{
+    @media (max-width: 767.99px) {
+        flex-basis: 100%;
+        &:not(.sb-open){
+            display: none!important;
+        }
+    } 
+}

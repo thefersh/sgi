@@ -5,8 +5,9 @@ import { PageNotFoundComponent } from './shared/components';
 import { HomeRoutingModule } from './home/home-routing.module';
 import { DetailRoutingModule } from './detail/detail-routing.module';
 import { LoginComponent } from './page/login/login.component';
-
+import { Layoutv1Component } from './layout/layoutv1/layoutv1.component';
 const routes: Routes = [
+  {path: '', component: Layoutv1Component},
   {path: 'login', component: LoginComponent},
   {path: '**',component: PageNotFoundComponent}
 ];

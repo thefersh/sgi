@@ -18,6 +18,7 @@ import { DetailModule } from './detail/detail.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './page/login/login.component';
+import { Layoutv1Component } from './layout/layoutv1/layoutv1.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -25,7 +26,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, Layoutv1Component],
   imports: [
     BrowserModule,
     FormsModule,

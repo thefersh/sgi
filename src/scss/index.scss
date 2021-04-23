@@ -7,3 +7,12 @@
     box-shadow: none;
     border-color: transparent;
 }
+
+app-root{
+    @apply flex;
+    @apply flex-col;
+    @apply h-full;
+}
+app-layoutv1{
+    @apply flex-1;
+}
